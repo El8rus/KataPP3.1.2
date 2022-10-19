@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+    <style>
+        .table {
+            margin-bottom: 20px;
+            border: 15px solid #FAC7BAFF;
+            border-top: 5px solid #FAC7BAFF;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .table th {
+            font-weight: bold;
+            padding: 5px;
+            background: #FAC7BAFF;
+            border: none;
+            border-bottom: 5px solid #FAC7BAFF;
+        }
+        .table td {
+            padding: 5px;
+            border: none;
+            border-bottom: 5px solid #FAC7BAFF;
+        }
+        .button {
+            width: 175px;
+        }
+    </style>
+</head>
+<body>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Логин</th>
+        <th scope="col">Пароль</th>
+        <th scope="col">Права</th>
+        <th scope="col">#</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.getId()}"/>
+        <td th:text="${user.getName()}"/>
+        <td th:text="${user.getLastName()}"/>
+        <td th:text="${user.getEmail()}"/>
+        <td th:text="${user.getUsername()}"/>
+        <td th:text="${user.getPassword()}"/>
+        <td th:text="${user.getRolesInfo()}"/>
+        <td> <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="..."/> </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/admin/new_user}">Создать нового пользователя</a>
+<hr/>
+<form action="#" th:action="@{/logout}" method="get">
+    <input class="button" type="submit" value="Выход"/>
+</form>
+</body>
+</html>

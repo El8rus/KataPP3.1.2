@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+    <style>
+        .button {
+            width: 175px;
+        }
+    </style>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/admin/{id}(id=${editUser.id})}" th:object="${editUser}">
+    <div>
+        <label for="name">Имя:</label>
+    </div>
+    <input type="text" th:field="${editUser.name}" id="name"/>
+    <br/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <br/>
+    <div>
+        <label for="last_name">Фамилия:</label>
+    </div>
+    <input type="text" th:field="${editUser.lastName}" id="last_name"/>
+    <br/>
+    <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Lastname error</div>
+    <br/>
+    <div>
+        <label for="email">E-mail:</label>
+    </div>
+    <input type="text" th:field="${editUser.email}" id="email"/>
+    <br/>
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <br/>
+    <div>
+        <label for="username">Логин:</label>
+    </div>
+    <input type="text" th:field="${editUser.username}" id="username"/>
+    <br/>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+    <br/>
+    <div>
+        <label for="password">Пароль:</label>
+    </div>
+    <input type="text" th:field="${editUser.password}" id="password"/>
+    <br/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+    <br/>
+    <div>
+        <label for="roles">Права:</label>
+    </div>
+    <th:block th:each="role: ${roles}">
+        <input type="checkbox" th:field="*{roles}" th:text="${role.role.substring(5)}" th:value="${role.id}" id="roles"/>
+    </th:block>
+    <br/>
+    <br/>
+    <input class="button" type="submit" value="Обновить"/>
+</form>
+<br/>
+<form th:method="DELETE" th:action="@{/admin/{id}(id=${editUser.id})}">
+    <input class="button" type="submit" value="Удалить"/>
+</form>
+<br/>
+<input class="button" type="button" onclick="history.back()" value="Назад">
+<br/>
+<br/>
+<form action="#" th:action="@{/logout}" method="get">
+    <input class="button" type="submit" value="Выход"/>
+</form>
+</body>
+</html>
