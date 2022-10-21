@@ -1,7 +1,5 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -40,12 +38,11 @@ public class User implements UserDetails {
     private String username;
 
     @NotEmpty(message = "Пароль обязателен для заполнения")
-    @Size(min = 6, max = 30, message = "Пароль должен состоять из не менее чем 6 и не более чем 30 символов")
+    @Size(min = 6, max = 100, message = "Пароль должен состоять из не менее чем 6 и не более чем 100 символов")
     @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "user_roles_map",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -53,6 +50,11 @@ public class User implements UserDetails {
 
     public User() {
 
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public User(Long id, String name, String lastName, String email, String username, String password, Set<Role> roles) {

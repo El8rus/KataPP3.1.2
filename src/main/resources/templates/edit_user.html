@@ -42,7 +42,7 @@
     <div>
         <label for="password">Пароль:</label>
     </div>
-    <input type="text" th:field="${editUser.password}" id="password"/>
+    <input type="password" th:field="${editUser.password}" id="password"/>
     <br/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
     <br/>

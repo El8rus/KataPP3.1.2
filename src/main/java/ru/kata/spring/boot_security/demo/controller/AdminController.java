@@ -57,7 +57,8 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}")
-    public String saveUser(@PathVariable("id") Long id, @ModelAttribute("editUser") @Valid User editUser,
+    public String saveUser(@PathVariable("id") Long id,
+                           @ModelAttribute("editUser") @Valid User editUser,
                            BindingResult bindingResult, Model model) {
         model.addAttribute("roles", roleRepository.findAll());
         if (bindingResult.hasErrors()) {
